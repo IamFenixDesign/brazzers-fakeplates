@@ -4,10 +4,15 @@ ALL CREDITS TO MANNY FROM Brazzers Development that made the original script
 
 Tweaks:
 ox_target compatibility
+
 configurable progressbar
+
 configurable animations
+
 configurable item for fakeplate
+
 configurable notifications (ox_lib)
+
 prevent system to cars that already have fake plate
 
 Original Features:
