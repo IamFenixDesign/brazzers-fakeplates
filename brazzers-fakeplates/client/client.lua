@@ -153,19 +153,11 @@ CreateThread(function()
                 distance = 2.5,
                 canInteract = function(entity, distance, coords, bone)
                     local plate = QBCore.Functions.GetPlate(entity)
-                    return exports[Config.Keys]:HasKeys(plate) and not hasFakePlate
+                    local hasItem = exports.ox_inventory:Search('count', Config.FakePlateItem) > 0
+                    return exports[Config.Keys]:HasKeys(plate) and not hasFakePlate and hasItem
                 end,
                 onSelect = function(data)
-                    local count = exports.ox_inventory:Search('count', Config.FakePlateItem)
-                    if count and count > 0 then
-                        TriggerEvent('brazzers-fakeplates:client:usePlate', GenerateFakePlate())
-                    else
-                        lib.notify({
-                            title = Config.Notifications.NoItem.title,
-                            description = Config.Notifications.NoItem.description,
-                            type = Config.Notifications.NoItem.type
-                        })
-                    end
+                    TriggerEvent('brazzers-fakeplates:client:usePlate', GenerateFakePlate())
                 end
             },
             {
@@ -192,7 +184,8 @@ CreateThread(function()
                     label = Config.TargetOptions.Install.label,
                     item = Config.FakePlateItem,
                     canInteract = function()
-                        return not hasFakePlate
+                        local hasItem = exports.ox_inventory:Search('count', Config.FakePlateItem) > 0
+                        return not hasFakePlate and hasItem
                     end
                 },
                 {
